@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block script_block %}
+<script src="{{ url_for('static', filename='js/logs.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="w-full h-screen bg-gray-100 flex flex-col items-center">
+        <!-- NavBar -->
+        <div class="w-full h-[50px] bg-gray-200 flex justify-between">
+            <div class="w-4/6 h-full flex ">
+                <div class="w-1/4 h-full flex justify-center items-center ">
+                    <p class="text-2xl font-bold italic">Server<span class="text-sky-500">Sync</span></p>
+                </div>
+                <div class="w-3/4 h-full flex justify-end">
+                    <div class="h-full px-4 flex justify-center items-center hover:bg-gray-300  border-b-sky-500 border-b-2">
+                        <a href="/" class="text-base">Builds</a>
+                    </div>
+                    <div class="h-full px-4 flex justify-center items-center hover:bg-gray-300">
+                        
+                        <a href="/setting" class="text-base">Setting</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/6 h-full flex justify-center items-center relative group">
+                <div class="flex items-center cursor-pointer" >
+                    <div class="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-gray-400">
+                        <i class="fa-solid fa-user text-gray-200"></i>
+                    </div>
+                    <p class="px-2">{{user}}</p>
+                    <i class="fa-solid fa-caret-down"></i>
+                    
+                </div>
+                <div id="logoutdropdown" class="absolute shadow-2xl top-[50px]  flex-col hidden group-hover:flex">
+                    <a href="/logout">
+                        <p class=" bg-gray-300 hover:bg-sky-500 hover:text-white w-[150px] text-center py-2 cursor-pointer">Logout</p>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        <!-- NavBar End -->
+
+        <div class="w-full flex-1 flex flex-col items-center mb-4 bg-gray-100">
+            <div class="w-3/4 py-4 flex  justify-end ">
+                <button id="rebuild" class="px-4 py-2 bg-sky-600 text-white flex justify-center items-center" onclick="handleReBuild(event)">Rebuild</button>
+            </div>
+            <div class="w-3/4  bg-sky-600 flex ">
+                <div class="p-2 text-sm text-white">Auto Scroll: <input type="checkbox" id="autoscroll" checked="true"></input></div>
+            </div>
+            <div class="w-3/4 h-[500px] bg-gray-200 p-2 overflow-y-auto scroll-smooth" id="log-container">
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
