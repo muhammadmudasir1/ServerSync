@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Setting{% endblock %}
+{% block script_block %}
+<script src="{{ url_for('static', filename='js/createInstance.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="w-full h-screen bg-gray-100 flex ">
+        <div class="flex flex-col h-full flex-1 relative">
+            <!-- NavBAr -->
+            <div class="w-full h-[50px] bg-gray-200 flex justify-between">
+                <div class="w-4/6 h-full flex ">
+                    <div class="w-1/4 h-full flex justify-center items-center ">
+                        <p class="text-2xl font-bold italic">Server<span class="text-sky-500">Sync</span></p>
+                    </div>
+                    <div class="w-3/4 h-full flex justify-end">
+                        <div class="h-full px-4 flex justify-center items-center hover:bg-gray-300">
+                            <a href="/" class="text-base">Builds</a>
+                        </div>
+                        <div class="h-full px-4 flex justify-center items-center hover:bg-gray-300 border-b-sky-500 border-b-2">
+                            
+                            <a href="/setting" class="text-base">Setting</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/6 h-full flex justify-center items-center relative group">
+                    <div class="flex items-center cursor-pointer" >
+                        <div class="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-gray-400">
+                            <i class="fa-solid fa-user text-gray-200"></i>
+                        </div>
+                        <p class="px-2">{{user}}</p>
+                        <i class="fa-solid fa-caret-down"></i>
+                        
+                    </div>
+                    <div id="logoutdropdown" class="absolute shadow-2xl top-[50px]  flex-col hidden group-hover:flex">
+                        <a href="/logout">
+                        <p class=" bg-gray-300 hover:bg-sky-500 hover:text-white w-[150px] text-center py-2 cursor-pointer">Logout</p>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- NavBar End -->
+
+            <!-- Content Section -->
+            <div class="w-full flex-1 flex justify-center  bg-gray-100">
+                <div class="w-3/4 mt-4">
+                    <div class="w-full flex justify-center p-8 text-xl "> <p class="border-b-sky-500 border-b-2">Create New Instance</p></div>
+                    <div class="w-full flex">
+                        <section class="w-1/2 flex flex-col px-2">
+                            <lable class="text-sm mb-1">Instance Name</lable>
+                            <input type="text" id="instanceName" class="outline-none p-2"></input>
+                        </section>
+                        <section class="w-1/2 flex flex-col px-2">
+                            <lable class="text-sm mb-1">Log File Path or Container Id(if containerized)</lable>
+                            <input type="text" id="logFile" class="outline-none p-2"></input>
+                        </section>
+                    </div>
+                    <div class="w-full flex mt-4 items-center">
+                        <section class="w-1/2 flex flex-col px-2">
+                            <lable class="text-sm mb-1">Project Name</lable>
+                            <input type="text" id="projectName" class="outline-none p-2"></input>
+                            <div class="w-full bg-gray-200">
+                                <p class="text-sm p-1 hover:cursor-pointer hover:bg-gray-300" onclick="handleSetProject(event)">Santex</p>
+                                <p class="text-sm p-1 hover:cursor-pointer hover:bg-gray-300" onclick="handleSetProject(event)">Anford</p>
+                                <p class="text-sm p-1 hover:cursor-pointer hover:bg-gray-300" onclick="handleSetProject(event)">Teezro</p>
+                            </div>
+                        </section>
+                        <section class="w-1/2  px-2 flex items-center">
+                            <lable class="text-sm mb-1">Containerized</lable>
+                            <input type="checkbox" id="containerized" class="outline-none ml-2 w-5 h-5"></input>
+                        </section>
+                    </div>
+                    <div class="w-full flex mt-4 items-center justify-center">
+                        <button type="button" id="createInstance" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white hover:text-black"
+                        onclick="handleSaveInstance(event)">Create</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popup message -->
+             <div id="popup" class="absolute w-full h-[50px] px-4 bottom-[50px] hidden transition-all duration-1000 ease-in-out">
+                <div class="w-full h-full flex justify-center items-center "></div>
+             </div>
+
+        </div>
+    </div>
+{% endblock %}
